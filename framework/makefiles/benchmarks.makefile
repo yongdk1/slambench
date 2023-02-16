@@ -52,6 +52,11 @@ usecases:
 	@echo    "    repository: https://github.com/GerhardR/kfusion"
 	@echo    "    available targets are : kfusion"
 	@echo    ""
+	
+	@echo -n "  - SPslam [Deng et al. ACIRS'19] : " ; if [ -d benchmarks/spslam/src/original ] ; then echo -e "\033[1;32mFound\033[0m" ; else echo -e "\033[1;31mNot found (make spslam)\033[0m" ; fi
+	@echo    "    repository: https://github.com/KinglittleQ/SuperPoint_SLAM"
+	@echo    "    available targets are : spslam"
+	@echo    ""
 
 	@echo "If you want to test SLAMBench with existing SLAM algorithms, once you have download it please run \"make slambench APPS=slam1,slam2,...\""
 	@echo "   e.g. make slambench APPS=kfusion,orbslam2"
@@ -182,8 +187,22 @@ kfusion:
 	git clone --branch update-master https://github.com/pamela-project/kfusion benchmarks/kfusion/src/original
 	@echo "cmake_minimum_required(VERSION 2.8)"   > benchmarks/$@/CMakeLists.txt
 	@echo "explore_implementations ( $@ src/* )"     >> benchmarks/$@/CMakeLists.txt
-.PHONY: svo orbslam2 ptam efusion kfusion lsdslam monoslam infinitam okvis
-algorithms :  svo orbslam2 ptam efusion kfusion lsdslam monoslam infinitam okvis
+spslam:
+	@echo "================================================================================================================="
+	@echo    "  - SuperPoint_SLAM [Mur-Artal et al, TOR'15 and TOR'17] "
+	@echo    "    Original repository: https://github.com/KinglittleQ/SuperPoint_SLAM"
+	@echo    "    Used repository: https://github.com/yongdk1/ORB_SLAM2.git branch spslam-slambench"
+	@echo "================================================================================================================="
+	@echo ""
+	@echo "Are you sure you want to download this use-case (y/n) ?" && ${GET_REPLY} && echo REPLY=$$REPLY && if [ ! "$$REPLY" == "y" ] ; then echo -e "\nExit."; false; else echo -e "\nDownload starts."; fi
+	mkdir -p benchmarks/spslam/src/original
+	rm benchmarks/spslam/src/original -rf
+	git clone --branch spslam-slambench https://github.com/yongdk1/ORB_SLAM2.git benchmarks/spslam/src/original
+	@echo "cmake_minimum_required(VERSION 2.8)"   > benchmarks/$@/CMakeLists.txt
+	@echo "explore_implementations ( $@ src/* )"     >> benchmarks/$@/CMakeLists.txt
+
+.PHONY: svo orbslam2 ptam efusion kfusion lsdslam monoslam infinitam okvis spslam
+algorithms :  svo orbslam2 ptam efusion kfusion lsdslam monoslam infinitam okvis spslam
 benchmarks_status:
 	@echo "************ Check-in efusion in benchmarks/efusion/src/original"
 	@if [ -d benchmarks/efusion/src/original ] ; then git -C benchmarks/efusion/src/original diff; fi
@@ -205,3 +224,5 @@ benchmarks_status:
 	@if [ -d benchmarks/svo/src/original ] ; then git -C benchmarks/svo/src/original diff; fi
 	@echo "************ Check-in kfusion in benchmarks/kfusion/src/original"
 	@if [ -d benchmarks/kfusion/src/original ] ; then git -C benchmarks/kfusion/src/original diff; fi
+	@echo "************ Check-in spslam in benchmarks/spslam/src/original"
+	@if [ -d benchmarks/spslam/src/original ] ; then git -C benchmarks/spslam/src/original diff; fi
