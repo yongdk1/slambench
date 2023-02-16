@@ -113,13 +113,13 @@ orbslam2:
 	@echo "================================================================================================================="
 	@echo    "  - ORBSLAM2 [Mur-Artal et al, TOR'15 and TOR'17] "
 	@echo    "    Original repository: https://github.com/raulmur/ORB_SLAM2"
-	@echo    "    Used repository: https://github.com/pamela-project/ORB_SLAM2.git"
+	@echo    "    Used repository: https://github.com/yongdk1/ORB_SLAM2.git branch orbslam2-slambench"
 	@echo "================================================================================================================="
 	@echo ""
 	@echo "Are you sure you want to download this use-case (y/n) ?" && ${GET_REPLY} && echo REPLY=$$REPLY && if [ ! "$$REPLY" == "y" ] ; then echo -e "\nExit."; false; else echo -e "\nDownload starts."; fi
 	mkdir -p benchmarks/orbslam2/src/original
 	rm benchmarks/orbslam2/src/original -rf
-	git clone --branch update-master https://github.com/pamela-project/ORB_SLAM2.git benchmarks/orbslam2/src/original
+	git clone --branch orbslam2-slambench https://github.com/yongdk1/ORB_SLAM2.git benchmarks/orbslam2/src/original
 	@echo "cmake_minimum_required(VERSION 2.8)"   > benchmarks/$@/CMakeLists.txt
 	@echo "explore_implementations ( $@ src/* )"     >> benchmarks/$@/CMakeLists.txt
 monoslam:
