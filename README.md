@@ -1,5 +1,25 @@
 # SLAMBench 
 
+## TLDR: Build and Run
+
+Dependencies (for Ubuntu 20.04):
+``` sudo apt-get -y install libvtk6.3 libvtk6-dev unzip libflann-dev wget mercurial git gcc g++ cmake python-numpy freeglut3 freeglut3-dev libglew-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev libxmu-dev libxi-dev  libboost-all-dev cvs libgoogle-glog-dev libatlas-base-dev gfortran  gtk2.0 libgtk2.0-dev  libyaml-dev build-essential libyaml-cpp-dev ```
+
+Then change to project directory and run:
+```bash
+make deps
+make orbslam2
+make slambench APPS=orbslam2
+```
+Replace orbslam2 with spslam for SuperPoint-SLAM.
+
+### Running SuperPoint-SLAM:
+#### Download Vocabulary
+You can download the vocabulary from [google drive](https://drive.google.com/file/d/1p1QEXTDYsbpid5ELp3IApQ8PGgm_vguC/view?usp=sharing) or [BaiduYun](https://pan.baidu.com/s/1fygQil78GpoPm0zoi6BMng) (code: de3g). And then put it into `Vocabulary` directory. The vocabulary was trained on [Bovisa_2008-09-01](http://www.rawseeds.org/rs/datasets/view//7) using DBoW3 library. Branching factor k and depth levels L are set to 5 and 10 respectively.
+
+#### Modify spslam_library.cpp: modify default_vocabulary_file on line 79 to location of superpoint_voc.yml on your local machine.
+
+
 [![Build Status](https://travis-ci.org/pamela-project/slambench2.svg?branch=master)](https://travis-ci.org/pamela-project/slambench2)
 
 Code has been added for the most recent paper based on SLAMBench:
