@@ -1,6 +1,6 @@
-# SLAMBench 
+# TLDR: Build and Run
 
-## TLDR: Build and Run
+modified ORB-SLAM2 and SuperPoint-SLAM libraries from [https://github.com/yongdk1/ORB_SLAM2]
 
 Dependencies (for Ubuntu 20.04):
 ``` sudo apt-get -y install libvtk6.3 libvtk6-dev unzip libflann-dev wget mercurial git gcc g++ cmake python-numpy freeglut3 freeglut3-dev libglew-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev libxmu-dev libxi-dev  libboost-all-dev cvs libgoogle-glog-dev libatlas-base-dev gfortran  gtk2.0 libgtk2.0-dev  libyaml-dev build-essential libyaml-cpp-dev ```
@@ -19,6 +19,10 @@ You can download the vocabulary from [google drive](https://drive.google.com/fil
 
 #### Modify spslam_library.cpp: modify default_vocabulary_file on line 79 to location of superpoint_voc.yml on your local machine.
 
+
+
+
+# SLAMBench 
 
 [![Build Status](https://travis-ci.org/pamela-project/slambench2.svg?branch=master)](https://travis-ci.org/pamela-project/slambench2)
 
